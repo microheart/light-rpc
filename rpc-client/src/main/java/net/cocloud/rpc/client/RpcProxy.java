@@ -2,8 +2,8 @@ package net.cocloud.rpc.client;
 
 import net.cocloud.rpc.common.bean.RpcRequest;
 import net.cocloud.rpc.common.bean.RpcResponse;
-import net.cocloud.rpc.common.util.StringUtil;
 import net.cocloud.rpc.registry.ServiceDiscovery;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,17 +56,17 @@ public class RpcProxy {
                         // 获取 RPC 服务地址
                         if (serviceDiscovery != null) {
                             String serviceName = interfaceClass.getName();
-                            if (StringUtil.isNotEmpty(serviceVersion)) {
+                            if (StringUtils.isNotBlank(serviceVersion)) {
                                 serviceName += "-" + serviceVersion;
                             }
                             serviceAddress = serviceDiscovery.discover(serviceName);
                             LOGGER.debug("discover service: {} => {}", serviceName, serviceAddress);
                         }
-                        if (StringUtil.isEmpty(serviceAddress)) {
+                        if (StringUtils.isBlank(serviceAddress)) {
                             throw new RuntimeException("server address is empty");
                         }
                         // 从 RPC 服务地址中解析主机名与端口号
-                        String[] array = StringUtil.split(serviceAddress, ":");
+                        String[] array = StringUtils.splitByWholeSeparator(serviceAddress, ":");
                         String host = array[0];
                         int port = Integer.parseInt(array[1]);
                         // 创建 RPC 客户端对象并发送 RPC 请求

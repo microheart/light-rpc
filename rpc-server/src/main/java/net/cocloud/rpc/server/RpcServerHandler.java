@@ -1,13 +1,13 @@
 package net.cocloud.rpc.server;
 
-import net.cocloud.rpc.common.bean.RpcRequest;
-import net.cocloud.rpc.common.bean.RpcResponse;
-import net.cocloud.rpc.common.util.StringUtil;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import net.cocloud.rpc.common.bean.RpcRequest;
+import net.cocloud.rpc.common.bean.RpcResponse;
 import net.sf.cglib.reflect.FastClass;
 import net.sf.cglib.reflect.FastMethod;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,7 +46,7 @@ public class RpcServerHandler extends SimpleChannelInboundHandler<RpcRequest> {
         // 获取服务对象
         String serviceName = request.getInterfaceName();
         String serviceVersion = request.getServiceVersion();
-        if (StringUtil.isNotEmpty(serviceVersion)) {
+        if (StringUtils.isNotBlank(serviceVersion)) {
             serviceName += "-" + serviceVersion;
         }
         Object serviceBean = handlerMap.get(serviceName);

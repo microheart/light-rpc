@@ -1,17 +1,17 @@
 package net.cocloud.rpc.server;
 
-import net.cocloud.rpc.common.bean.RpcRequest;
-import net.cocloud.rpc.common.bean.RpcResponse;
-import net.cocloud.rpc.common.codec.RpcDecoder;
-import net.cocloud.rpc.common.codec.RpcEncoder;
-import net.cocloud.rpc.common.util.StringUtil;
-import net.cocloud.rpc.registry.ServiceRegistry;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import net.cocloud.rpc.common.bean.RpcRequest;
+import net.cocloud.rpc.common.bean.RpcResponse;
+import net.cocloud.rpc.common.codec.RpcDecoder;
+import net.cocloud.rpc.common.codec.RpcEncoder;
+import net.cocloud.rpc.registry.ServiceRegistry;
 import org.apache.commons.collections4.MapUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -56,7 +56,7 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
                 RpcService rpcService = serviceBean.getClass().getAnnotation(RpcService.class);
                 String serviceName = rpcService.value().getName();
                 String serviceVersion = rpcService.version();
-                if (StringUtil.isNotEmpty(serviceVersion)) {
+                if (StringUtils.isNotBlank(serviceVersion)) {
                     serviceName += "-" + serviceVersion;
                 }
                 handlerMap.put(serviceName, serviceBean);
@@ -85,7 +85,7 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
             bootstrap.option(ChannelOption.SO_BACKLOG, 1024);
             bootstrap.childOption(ChannelOption.SO_KEEPALIVE, true);
             // 获取 RPC 服务器的 IP 地址与端口号
-            String[] addressArray = StringUtil.split(serviceAddress, ":");
+            String[] addressArray = StringUtils.splitByWholeSeparator(serviceAddress, ":");
             String ip = addressArray[0];
             int port = Integer.parseInt(addressArray[1]);
             // 启动 RPC 服务器
