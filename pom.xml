@@ -13,20 +13,25 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <version.slf4j>1.7.10</version.slf4j>
-        <version.spring>4.1.5.RELEASE</version.spring>
-        <version.netty>4.0.26.Final</version.netty>
-        <version.protostuff>1.0.9</version.protostuff>
-        <version.objenesis>2.1</version.objenesis>
-        <version.cglib>3.1</version.cglib>
-        <version.zookeeper>3.4.6</version.zookeeper>
-        <version.zkclient>0.4</version.zkclient>
-        <version.commons-lang>3.3.2</version.commons-lang>
-        <version.commons-collections>4.0</version.commons-collections>
-        <version.maven-compiler-plugin>3.2</version.maven-compiler-plugin>
-        <version.maven-surefire-plugin>2.18.1</version.maven-surefire-plugin>
-        <version.maven-source-plugin>3.0.1</version.maven-source-plugin>
-        <version.maven-javadoc-plugin>2.10.4</version.maven-javadoc-plugin>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <slf4j.version>1.7.25</slf4j.version>
+        <spring.version>4.3.8.RELEASE</spring.version>
+        <netty.version>4.0.45.Final</netty.version>
+        <protostuff.version>1.1.1</protostuff.version>
+        <objenesis.version>2.5.1</objenesis.version>
+        <cglib.version>3.2.5</cglib.version>
+        <zookeeper.version>3.4.10</zookeeper.version>
+        <zkclient.version>0.10</zkclient.version>
+        <commons-lang3.version>3.5</commons-lang3.version>
+        <commons-collections4.version>4.1</commons-collections4.version>
+
+        <maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
+        <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
+        <maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -35,72 +40,72 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
-                <version>${version.slf4j}</version>
+                <version>${slf4j.version}</version>
             </dependency>
             <!-- Spring -->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
-                <version>${version.spring}</version>
+                <version>${spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
-                <version>${version.spring}</version>
+                <version>${spring.version}</version>
                 <scope>test</scope>
             </dependency>
             <!-- Netty -->
             <dependency>
                 <groupId>io.netty</groupId>
                 <artifactId>netty-all</artifactId>
-                <version>${version.netty}</version>
+                <version>${netty.version}</version>
             </dependency>
             <!-- Protostuff -->
             <dependency>
                 <groupId>com.dyuproject.protostuff</groupId>
                 <artifactId>protostuff-core</artifactId>
-                <version>${version.protostuff}</version>
+                <version>${protostuff.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.dyuproject.protostuff</groupId>
                 <artifactId>protostuff-runtime</artifactId>
-                <version>${version.protostuff}</version>
+                <version>${protostuff.version}</version>
             </dependency>
             <!-- Objenesis -->
             <dependency>
                 <groupId>org.objenesis</groupId>
                 <artifactId>objenesis</artifactId>
-                <version>${version.objenesis}</version>
+                <version>${objenesis.version}</version>
             </dependency>
             <!-- CGLib -->
             <dependency>
                 <groupId>cglib</groupId>
                 <artifactId>cglib</artifactId>
-                <version>${version.cglib}</version>
+                <version>${cglib.version}</version>
             </dependency>
             <!-- ZooKeeper -->
             <dependency>
                 <groupId>org.apache.zookeeper</groupId>
                 <artifactId>zookeeper</artifactId>
-                <version>${version.zookeeper}</version>
+                <version>${zookeeper.version}</version>
             </dependency>
             <!-- ZkClient -->
             <dependency>
                 <groupId>com.101tec</groupId>
                 <artifactId>zkclient</artifactId>
-                <version>${version.zkclient}</version>
+                <version>${zkclient.version}</version>
             </dependency>
             <!-- Apache Commons Lang -->
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>${version.commons-lang}</version>
+                <version>${commons-lang3.version}</version>
             </dependency>
             <!-- Apache Commons Collections -->
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-collections4</artifactId>
-                <version>${version.commons-collections}</version>
+                <version>${commons-collections4.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -111,7 +116,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${version.maven-compiler-plugin}</version>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -122,7 +127,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${version.maven-surefire-plugin}</version>
+                <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <skipTests>true</skipTests>
                 </configuration>
@@ -139,7 +144,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
-                        <version>${version.maven-source-plugin}</version>
+                        <version>${maven-source-plugin.version}</version>
                         <executions>
                             <execution>
                                 <phase>package</phase>
@@ -156,7 +161,7 @@
                         <configuration>
                             <additionalparam>-Xdoclint:none</additionalparam>
                         </configuration>
-                        <version>${version.maven-javadoc-plugin}</version>
+                        <version>${maven-javadoc-plugin.version}</version>
                         <executions>
                             <execution>
                                 <phase>package</phase>
