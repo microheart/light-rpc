@@ -1,6 +1,7 @@
 package net.cocloud.rpc.registry.zookeeper;
 
 import net.cocloud.rpc.registry.ServiceDiscovery;
+import net.cocloud.rpc.registry.ServiceNotExistException;
 import org.I0Itec.zkclient.ZkClient;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
@@ -31,12 +32,13 @@ public class ZooKeeperServiceDiscovery implements ServiceDiscovery {
             // 获取 service 节点
             String servicePath = Constant.ZK_REGISTRY_PATH + "/" + name;
             if (!zkClient.exists(servicePath)) {
-                throw new RuntimeException(String.format("can not find any service node on path: %s", servicePath));
+                throw new ServiceNotExistException(servicePath);
             }
             List<String> addressList = zkClient.getChildren(servicePath);
             if (CollectionUtils.isEmpty(addressList)) {
-                throw new RuntimeException(String.format("can not find any address node on path: %s", servicePath));
+                throw new ServiceNotExistException(servicePath);
             }
+
             // 获取 address 节点
             String address;
             int size = addressList.size();
