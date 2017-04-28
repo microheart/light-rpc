@@ -11,22 +11,24 @@ public class ZooKeeperServiceRegistry implements ServiceRegistry {
 
     private final ZkClient zkClient;
 
-    public ZooKeeperServiceRegistry(String zkAddress) {
+    public ZooKeeperServiceRegistry(final String zkAddress) {
         // 创建 ZooKeeper 客户端
         zkClient = new ZkClient(zkAddress, Constant.ZK_SESSION_TIMEOUT, Constant.ZK_CONNECTION_TIMEOUT);
         LOGGER.debug("connect zookeeper");
-    }
 
-    @Override
-    public void register(String serviceName, String serviceAddress) {
         // 创建 registry 节点（持久）
-        String registryPath = Constant.ZK_REGISTRY_PATH;
+        final String registryPath = Constant.ZK_REGISTRY_PATH;
         if (!zkClient.exists(registryPath)) {
             zkClient.createPersistent(registryPath);
             LOGGER.debug("create registry node: {}", registryPath);
         }
+    }
+
+    @Override
+    public void register(final String serviceName, final String serviceAddress) {
+
         // 创建 service 节点（持久）
-        String servicePath = registryPath + "/" + serviceName;
+        String servicePath = Constant.ZK_REGISTRY_PATH + "/" + serviceName;
         if (!zkClient.exists(servicePath)) {
             zkClient.createPersistent(servicePath);
             LOGGER.debug("create service node: {}", servicePath);
