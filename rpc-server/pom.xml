@@ -7,7 +7,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>net.cocloud.rpc</groupId>
+        <groupId>com.iknowers</groupId>
         <artifactId>rpc</artifactId>
         <version>1.0.0</version>
     </parent>
@@ -27,13 +27,13 @@
         </dependency>
         <!-- RPC Common -->
         <dependency>
-            <groupId>net.cocloud.rpc</groupId>
+            <groupId>com.iknowers</groupId>
             <artifactId>rpc-common</artifactId>
             <version>${project.version}</version>
         </dependency>
         <!-- RPC Registry with ZooKeeper -->
         <dependency>
-            <groupId>net.cocloud.rpc</groupId>
+            <groupId>com.iknowers</groupId>
             <artifactId>rpc-registry-zookeeper</artifactId>
             <version>${project.version}</version>
         </dependency>
