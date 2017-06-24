@@ -17,14 +17,12 @@ public class ApplicationConfig {
 
     @Bean
     public ServiceRegistry serviceRegistry(@Value("${rpc.registry_address}") String zookeeperAddress ) {
-        System.out.println(zookeeperAddress);
         return new ZooKeeperServiceRegistry(zookeeperAddress);
     }
 
     @Bean
     @Autowired
     public RpcServer RpcServer(@Value("${rpc.service_address}") String serviceAddress, ServiceRegistry serviceRegistry) {
-        System.out.println(serviceAddress);
         return new RpcServer(serviceAddress, serviceRegistry);
     }
 }
