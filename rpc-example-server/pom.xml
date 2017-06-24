@@ -12,10 +12,10 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>rpc-sample-server</artifactId>
+    <artifactId>rpc-example-server</artifactId>
 
     <dependencies>
-        <!-- RPC Sample API -->
+        <!-- RPC Example API -->
         <dependency>
             <groupId>com.iknowers</groupId>
             <artifactId>rpc-example-api</artifactId>

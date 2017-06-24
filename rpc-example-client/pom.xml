@@ -24,7 +24,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
         </dependency>
-        <!-- RPC Sample API -->
+        <!-- RPC Example API -->
         <dependency>
             <groupId>com.iknowers</groupId>
             <artifactId>rpc-example-api</artifactId>
