@@ -59,16 +59,22 @@ A lightweight RPC framework based on Netty, ZooKeeper and Spring
 
 #### RPC服务端配置
 
-    <context:property-placeholder location="classpath:rpc.properties"/>
-
-    <bean id="serviceRegistry" class="com.iknowers.rpc.registry.zookeeper.ZooKeeperServiceRegistry">
-        <constructor-arg name="zkAddress" value="${rpc.registry_address}"/>
-    </bean>
-
-    <bean id="rpcServer" class="com.iknowers.rpc.server.RpcServer">
-        <constructor-arg name="serviceAddress" value="${rpc.service_address}"/>
-        <constructor-arg name="serviceRegistry" ref="serviceRegistry"/>
-    </bean>
+    @Configuration
+    @PropertySource("classpath:rpc.properties")
+    @ComponentScan("com.iknowers.rpc.example.server.service")
+    public class ApplicationConfig {
+    
+        @Bean
+        public ServiceRegistry serviceRegistry(@Value("${rpc.registry_address}") String zookeeperAddress ) {
+            return new ZooKeeperServiceRegistry(zookeeperAddress);
+        }
+    
+        @Bean
+        @Autowired
+        public RpcServer RpcServer(@Value("${rpc.service_address}") String serviceAddress, ServiceRegistry serviceRegistry) {
+            return new RpcServer(serviceAddress, serviceRegistry);
+        }
+    }
 
 rpc.properties
 
@@ -123,15 +129,21 @@ rpc.properties
 
 #### RPC客户端配置
 
-    <context:property-placeholder location="classpath:rpc.properties"/>
-
-    <bean id="serviceDiscovery" class="com.iknowers.rpc.registry.zookeeper.ZooKeeperServiceDiscovery">
-        <constructor-arg name="zkAddress" value="${rpc.registry_address}"/>
-    </bean>
-
-    <bean id="rpcProxy" class="com.iknowers.rpc.client.RpcProxy">
-        <constructor-arg name="serviceDiscovery" ref="serviceDiscovery"/>
-    </bean>
+    @Configuration
+    @PropertySource("classpath:rpc.properties")
+    public class ApplicationConfig {
+    
+        @Bean
+        public ServiceDiscovery serviceDiscovery(@Value("${rpc.registry_address}") String zookeeperAddress ) {
+            return new ZooKeeperServiceDiscovery(zookeeperAddress);
+        }
+    
+        @Bean
+        @Autowired
+        public RpcProxy rpcProxy(ServiceDiscovery serviceDiscovery) {
+            return new RpcProxy(serviceDiscovery);
+        }
+    }
     
 rpc.properties
 
