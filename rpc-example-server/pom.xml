@@ -59,7 +59,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib</classpathPrefix>
-                            <mainClass>com.iknowers.rpc.example.server.RpcBootstrap</mainClass>
+                            <mainClass>com.iknowers.rpc.example.server.Application</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

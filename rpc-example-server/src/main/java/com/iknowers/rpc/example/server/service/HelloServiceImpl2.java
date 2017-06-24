@@ -1,10 +1,10 @@
-package com.iknowers.rpc.example.server;
+package com.iknowers.rpc.example.server.service;
 
 import com.iknowers.rpc.example.api.HelloService;
 import com.iknowers.rpc.example.api.Person;
 import com.iknowers.rpc.server.RpcService;
 
-@RpcService(value = HelloService.class, version = "sample.hello2")
+@RpcService(value = HelloService.class, version = "v2")
 public class HelloServiceImpl2 implements HelloService {
 
     @Override
@@ -14,6 +14,6 @@ public class HelloServiceImpl2 implements HelloService {
 
     @Override
     public String hello(Person person) {
-        return "你好! " + person.getFirstName() + " " + person.getLastName();
+        return String.format("您好, %s %s,  欢迎来到RPC世界。", person.getFirstName(), person.getLastName());
     }
 }
