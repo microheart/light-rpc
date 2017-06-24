@@ -71,7 +71,8 @@ A lightweight RPC framework based on Netty, ZooKeeper and Spring
     
         @Bean
         @Autowired
-        public RpcServer RpcServer(@Value("${rpc.service_address}") String serviceAddress, ServiceRegistry serviceRegistry) {
+        public RpcServer RpcServer(@Value("${rpc.service_address}") String serviceAddress,
+                                   ServiceRegistry serviceRegistry) {
             return new RpcServer(serviceAddress, serviceRegistry);
         }
     }
@@ -86,13 +87,13 @@ rpc.properties
 
 #### 启动RPC服务
 
-    public class RpcBootstrap {
+    public class Application {
     
-        private static final Logger LOGGER = LoggerFactory.getLogger(RpcBootstrap.class);
+        private static final Logger LOGGER = LoggerFactory.getLogger(Application.class);
     
         public static void main(String[] args) {
             LOGGER.debug("start server");
-            new ClassPathXmlApplicationContext("spring.xml");
+            new AnnotationConfigApplicationContext(ApplicationConfig.class);
         }
     }
     
@@ -156,7 +157,7 @@ rpc.properties
     public class HelloClient {
     
         public static void main(String[] args) throws Exception {
-            ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+            ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
             RpcProxy rpcProxy = context.getBean(RpcProxy.class);
     
             HelloService helloService = rpcProxy.create(HelloService.class);
