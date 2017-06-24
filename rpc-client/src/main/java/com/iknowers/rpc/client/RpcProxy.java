@@ -19,13 +19,7 @@ public class RpcProxy {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RpcProxy.class);
 
-    private String serviceAddress;
-
     private ServiceDiscovery serviceDiscovery;
-
-    public RpcProxy(String serviceAddress) {
-        this.serviceAddress = serviceAddress;
-    }
 
     public RpcProxy(ServiceDiscovery serviceDiscovery) {
         this.serviceDiscovery = serviceDiscovery;
@@ -41,7 +35,7 @@ public class RpcProxy {
         // 创建动态代理对象
         return (T) Proxy.newProxyInstance(
                 interfaceClass.getClassLoader(),
-                new Class<?>[]{interfaceClass},
+                new Class<?>[] {interfaceClass},
                 new InvocationHandler() {
                     @Override
                     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
@@ -54,6 +48,7 @@ public class RpcProxy {
                         request.setParameterTypes(method.getParameterTypes());
                         request.setParameters(args);
                         // 获取 RPC 服务地址
+                        String serviceAddress = null;
                         if (serviceDiscovery != null) {
                             String serviceName = interfaceClass.getName();
                             if (StringUtils.isNotBlank(serviceVersion)) {
