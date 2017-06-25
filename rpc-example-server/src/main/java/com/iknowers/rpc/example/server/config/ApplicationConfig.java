@@ -12,7 +12,7 @@ import org.springframework.context.annotation.PropertySource;
 
 @Configuration
 @PropertySource("classpath:rpc.properties")
-@ComponentScan("com.iknowers.rpc.example.server.service")
+@ComponentScan("com.iknowers.rpc.example.server")
 public class ApplicationConfig {
 
     @Bean
@@ -22,7 +22,7 @@ public class ApplicationConfig {
 
     @Bean
     @Autowired
-    public RpcServer RpcServer(@Value("${rpc.service_address}") String serviceAddress, ServiceRegistry serviceRegistry) {
+    public RpcServer rpcServer(@Value("${rpc.service_address}") String serviceAddress, ServiceRegistry serviceRegistry) {
         return new RpcServer(serviceAddress, serviceRegistry);
     }
 }
